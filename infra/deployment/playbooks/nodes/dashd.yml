@@ -1,0 +1,19 @@
+---
+- hosts: dashd
+  gather_facts: no
+  roles:
+    - ubuntu-16-04
+    - node
+
+  vars:
+    - node_user: dash
+    - node_group: dash
+    - node_data_folder: '.dashcore'
+    - node_download_url: https://github.com/dashpay/dash/releases/download/v0.14.0.2/dashcore-0.14.0.2-x86_64-linux-gnu.tar.gz
+    - node_download_checksum: sha1:6dd71f99b3891ff95e08ef82d5418b562d165ac9
+    - node_compressed_file: /home/ubuntu/dash.tar.gz
+    - node_daemon_file: dashcore-0.14.0/bin/dashd
+    - node_config_file: config/nodes/dash.conf
+    - node_config_filename: dash.conf
+    - node_executable: dashd
+    - node_service_name: dashd

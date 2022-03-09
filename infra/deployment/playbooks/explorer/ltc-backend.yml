@@ -1,0 +1,10 @@
+---
+- hosts: server
+  gather_facts: no
+  roles:
+    - ubuntu-16-04
+    - explorer
+
+  vars:
+    explorer_config_file: 'config/explorer/litecoin-explorer.env'
+    explorer_service_name: 'ltc-backend'

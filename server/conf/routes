@@ -1,0 +1,49 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# https://www.playframework.com/documentation/latest/ScalaRouting
+# ~~~~
+
+GET   /health                controllers.HealthController.check()
+# GET   /maintenance           controllers.MaintenanceController.run(query: String ?= "")
+
+GET   /transactions              controllers.TransactionsController.getTransactions(limit: Int ?= 10, lastSeenTxid: Option[String], order: String ?= "desc", includeZeroValueTransactions: Boolean ?= true)
+GET   /transactions/:txid        controllers.TransactionsController.getTransaction(txid: String)
+GET   /transactions/:txid/raw    controllers.TransactionsController.getRawTransaction(txid: String)
+POST  /transactions              controllers.TransactionsController.sendRawTransaction()
+GET   /transactions/:txid/lite   controllers.TransactionsController.getTransactionLite(txid: String)
+GET   /transactions/:txid/utxos/:index               controllers.TransactionsController.getTransactionUtxoByIndex(txid: String, index: Int, includeMempool: Boolean ?= true)
+GET   /transactions/:txid/utxos/:index/spending-transaction               controllers.TransactionsController.getSpendingTransaction(txid: String, index: Int)
+POST   /tposcontracts/encode     controllers.TransactionsController.encodeTPOSContract()
+
+GET   /addresses/:address                            controllers.AddressesController.getBy(address: String)
+GET   /addresses/:address/tposcontracts              controllers.AddressesController.getTPoSContracts(address: String)
+GET   /addresses/:address/transactions               controllers.AddressesController.getTransactions(address: String, limit: Int ?= 10, lastSeenTxid: Option[String], order: String ?= "desc")
+GET   /v2/addresses/:address/transactions            controllers.AddressesController.getLightWalletTransactions(address: String, limit: Int ?= 10, lastSeenTxid: Option[String], order: String ?= "desc")
+GET   /addresses/:address/utxos                      controllers.AddressesController.getUnspentOutputs(address: String)
+
+GET   /blocks                            controllers.BlocksController.getLatestBlocks()
+GET   /v2/blocks                         controllers.BlocksController.getBlocks(lastSeenHash: Option[String], limit: Int ?= 10, order: String ?= "desc")
+GET   /block-headers                     controllers.BlocksController.getBlockHeaders(lastSeenHash: Option[String], limit: Int ?= 10, order: String ?= "asc")
+GET   /block-headers/:query              controllers.BlocksController.getBlockHeader(query: String, includeFilter: Boolean ?= false)
+GET   /blocks/estimate-fee               controllers.BlocksController.estimateFee(nBlocks: Int ?= 1)
+GET   /blocks/:blockhash/lite            controllers.BlocksController.getBlockLite(blockhash: String)
+
+GET   /blocks/:query                     controllers.BlocksController.getDetails(query: String)
+GET   /blocks/:query/raw                 controllers.BlocksController.getRawBlock(query: String)
+GET   /v2/blocks/:blockhash/transactions controllers.BlocksController.getTransactionsV2(blockhash: String, limit: Int ?= 10, lastSeenTxid: Option[String])
+GET   /v2/blocks/:blockhash/light-wallet-transactions controllers.BlocksController.getLightTransactionsV2(blockhash: String, limit: Int ?= 10, lastSeenTxid: Option[String])
+GET   /v2/blocks/:blockhash/hex controllers.BlocksController.getHexEncodedBlock(blockhash: String)
+GET   /v2/blocks/:height/transactions/:txindex/lite controllers.BlocksController.getLiteTransaction(height: Int, txindex: Int)
+
+GET   /stats                 controllers.StatisticsController.getStatus()
+GET   /node-stats            controllers.StatisticsController.getNodeStatus()
+GET   /rewards-summary       controllers.StatisticsController.getBlockRewardsSummary()
+GET   /prices              controllers.StatisticsController.getCurrency(currency: Option[String])
+
+GET   /v2/balances           controllers.BalancesController.getHighest(limit: Int ?= 10, lastSeenAddress: Option[String])
+
+GET   /masternodes           controllers.MasternodesController.get(offset: Int ?= 0, limit: Int ?= 10, orderBy: String ?= "")
+GET   /masternodes/:ip       controllers.MasternodesController.getBy(ip: String)
+
+GET   /merchantnodes           controllers.MerchantnodesController.get(offset: Int ?= 0, limit: Int ?= 10, orderBy: String ?= "")
+GET   /merchantnodes/:ip       controllers.MerchantnodesController.getBy(ip: String)

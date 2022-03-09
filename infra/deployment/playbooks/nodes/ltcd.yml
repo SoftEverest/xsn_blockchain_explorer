@@ -1,0 +1,19 @@
+---
+- hosts: ltcd
+  gather_facts: no
+  roles:
+    - ubuntu-16-04
+    - node
+
+  vars:
+    - node_user: ltc
+    - node_group: ltc
+    - node_data_folder: '.litecoin'
+    - node_download_url: https://download.litecoin.org/litecoin-0.16.3/linux/litecoin-0.16.3-x86_64-linux-gnu.tar.gz
+    - node_download_checksum: sha1:963e958bf5dd045fd70d787d6830f64962ae977d
+    - node_compressed_file: /home/ubuntu/litecoin.tar.gz
+    - node_daemon_file: litecoin-0.16.3/bin/litecoind
+    - node_config_file: config/nodes/litecoin.conf
+    - node_config_filename: litecoin.conf
+    - node_executable: litecoind
+    - node_service_name: ltc-rpc

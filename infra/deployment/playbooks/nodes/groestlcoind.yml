@@ -1,0 +1,19 @@
+---
+- hosts: groestlcoind
+  gather_facts: no
+  roles:
+    - ubuntu-16-04
+    - node
+
+  vars:
+    - node_user: groestlcoin
+    - node_group: groestlcoin
+    - node_data_folder: '.groestlcoin'
+    - node_download_url: https://github.com/Groestlcoin/groestlcoin/releases/download/v2.17.2/groestlcoin-2.17.2-x86_64-linux-gnu.tar.gz
+    - node_download_checksum: sha1:3f9e18082e89d0e73b0f2c4e1c8305052c7c8f77
+    - node_compressed_file: /home/ubuntu/groestlcoin.tar.gz
+    - node_daemon_file: groestlcoin-2.17.2/bin/groestlcoind
+    - node_config_file: config/nodes/groestlcoin.conf
+    - node_config_filename: groestlcoin.conf
+    - node_executable: groestlcoind
+    - node_service_name: groestlcoin-rpc

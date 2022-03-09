@@ -1,0 +1,23 @@
+---
+- hosts: bitcoind
+  gather_facts: no
+  roles:
+    - ubuntu-16-04
+    - node
+
+  vars:
+    - node_user: bitcoin
+    - node_group: bitcoin
+    - node_data_folder: '.bitcoin'
+    - node_download_url: https://bitcoin.org/bin/bitcoin-core-0.18.0/bitcoin-0.18.0-x86_64-linux-gnu.tar.gz
+    - node_download_checksum: sha1:858bc1833dfdb8ae3c7df7206ff29e0d9c454696
+    - node_compressed_file: /home/ubuntu/bitcoin.tar.gz
+    - node_daemon_file: bitcoin-0.18.0/bin/bitcoind
+    - node_config_file: config/nodes/bitcoin.conf
+    - node_config_filename: bitcoin.conf
+    - node_executable: bitcoind
+    - node_service_name: bitcoin-rpc
+    - node_private_ip_map:
+        'bitcoind-01': '10.136.64.36'
+        'bitcoind-02': '10.136.184.206'
+        'bitcoind-03': '10.136.132.146'
